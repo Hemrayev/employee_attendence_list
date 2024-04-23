@@ -1,0 +1,110 @@
+{% load static%}
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Hasaba almak</title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static '/vendors/bootstrap/dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static '/vendors/font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static '/vendors/themify-icons/css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static '/vendors/flag-icon-css/css/flag-icon.min.css' %}">
+    <link rel="stylesheet" href="{% static '/vendors/selectFX/css/cs-skin-elastic.css' %}">
+    <link rel="stylesheet" href="{% static '/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static '/vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %}">
+
+    <link rel="stylesheet" href="{% static '/assets/css/style.css' %}">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+{% include 'inc/_sidebar.html' %}
+<div id="right-panel" class="right-panel">
+    {% include 'inc/_navbar.html' %}
+    <div class="content mt-3">
+      {% if messages %}
+            {% for message in messages %}
+                <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+                    <span class="badge badge-pill badge-danger">Warning</span>
+                     {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">Giriş maglumatlary</strong>
+                        </div>
+                        <div class="card-body">
+                            <form action="" method="POST" enctype="multipart/form-data">
+                                {%csrf_token%}
+                                <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                                    <thead style="text-align: center">
+                                    <tr>
+                                        <th>Ady, Familiýasy</th>
+                                        <th>Wezipesi</th>
+                                        {% for item in geti %}
+                                            <th>{{ item|date:'d.m.Y' }}</th>
+                                        {% endfor %}
+                                    </tr>
+                                    </thead>
+                                    <tbody style="text-align: center">
+                                    {% for item in staff %}
+                                        <tr>
+                                            <td><a href="{{ item.get_absolute_url }}">{{ item.fullname }}</a></td>
+                                            <td>{{ item.profession }}</td>
+                                            {% for value in item.get_in.values %}
+                                                {% if value.in_work %}
+                                                <td>Geldi</td>
+                                                    {% else %}
+                                                    <td>Gelmedi</td>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                                <button class="btn btn-secondary" type="submit" style="float: right; margin-top: 10px; background-color: #00A000">Ýatda sakla</button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- .animated -->
+    </div><!-- .content -->
+</div><!-- /#right-panel -->
+<script src="{% static '/vendors/jquery/dist/jquery.min.js' %}"></script>
+<script src="{% static '/vendors/popper.js/dist/umd/popper.min.js' %}"></script>
+<script src="{% static '/vendors/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+<script src="{% static '/assets/js/main.js' %}"></script>
+<script src="{% static '/vendors/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static '/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static '/assets/js/init-scripts/data-table/datatables-init.js' %}"></script>
+<script>
+    let waw = window.location.protocol
+        + "//"
+        + window.location.host
+        + window.location.pathname
+        + window.location.search.substr(0, window.location.search.indexOf('&')-1)
+    const unical_address = window.location.href.replace(`${waw}`, '')
+    let sel = document.getElementById('bootstrap-data-table-export_length').textContent;
+    document.getElementById('text').innerText = sel
+</script>
+</body>
+
+</html>

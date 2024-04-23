@@ -1,0 +1,129 @@
+{% load static %}
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Işgär - {{ staffs.fullname }}</title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="{% static '/vendors/bootstrap/dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static '/vendors/font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static '/vendors/themify-icons/css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static '/vendors/flag-icon-css/css/flag-icon.min.css' %}">
+    <link rel="stylesheet" href="{% static '/vendors/selectFX/css/cs-skin-elastic.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+
+
+</head>
+
+<body>
+<!-- Left Panel -->
+
+{% include 'inc/_sidebar.html' %}<!-- /#left-panel -->
+
+<!-- Left Panel -->
+
+<!-- Right Panel -->
+
+<div id="right-panel" class="right-panel">
+
+    <!-- Header-->
+    {% include 'inc/_navbar.html' %}<!-- /header -->
+    <!-- Header-->
+
+    <div class="content mt-3">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-6">
+                    <section class="card">
+                        <div class="twt-feed blue-bg">
+                            <div class="corner-ribon black-ribon">
+                                <i class="fa  fa-adn"></i>
+                            </div>
+                            <div class="fa  fa-adn wtt-mark"></div>
+
+                            <div class="media">
+                                {% if staffs.image %}
+                                    <img src="{{ staffs.image.url }}" class="align-self-center rounded-circle mr-3" alt="{{ people.id }}" style="width:85px; height:85px;">
+                                {% else %}
+                                    <img src="{% static 'img/blank-profile-picture.png' %}"  class="align-self-center rounded-circle mr-3" alt="blank" style="width:85px; height:85px;">
+                                {% endif %}
+                                <div class="media-body">
+                                    <h2 class="text-white display-6">{{ staffs.fullname }}</h2>
+                                    <p class="text-light">{{ staffs.profession }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <footer class="twt-footer" style="font-size: 18px">
+                            <a href="#"><i class="fa fa-envelope"></i> {{ staffs.mail }}</a><br>
+                            <a href="#"><i class="fa fa-phone"></i> {{ staffs.phone_number }}</a>
+                        </footer>
+                    </section>
+
+                </div>
+                <div class="col-md-6 ">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">Giriş wagtlary</strong>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Güni</th>
+                                    <th scope="col">Geldi we gelmedi</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for item in get_in %}
+                                    <tr>
+                                        <th scope="row">{{ forloop.counter }}</th>
+                                        <td>{{ item.get_in_date |date:"d.m.Y" }}</td>
+                                        {% if  item.in_work %}
+                                            <td>Geldi</td>
+                                        {% else %}
+                                            <td>Gelmedi</td>
+                                        {% endif %}
+                                    </tr>
+
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div><!-- .animated -->
+</div><!-- .content -->
+
+
+</div><!-- /#right-panel -->
+
+<!-- Right Panel -->
+
+
+<script src="{% static '/vendors/jquery/dist/jquery.min.js' %}"></script>
+<script src="{% static '/vendors/popper.js/dist/umd/popper.min.js' %}"></script>
+<script src="{% static '/vendors/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+<script src="{% static '/assets/js/main.js' %}"></script>
+
+
+</body>
+
+</html>

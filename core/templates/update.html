@@ -1,0 +1,135 @@
+{% load static %}
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{ staff.fullname }} üýtgetmek</title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+    <link rel="stylesheet" href="{% static '/vendors/bootstrap/dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static '/vendors/font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static '/vendors/themify-icons/css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static '/vendors/flag-icon-css/css/flag-icon.min.css' %}">
+    <link rel="stylesheet" href="{% static '/vendors/selectFX/css/cs-skin-elastic.css' %}">
+    <!--    <link rel="stylesheet" href="vendors/jqvmap/dist/jqvmap.min.css">-->
+
+
+    <link rel="stylesheet" href="{% static '/assets/css/style.css' %}">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body>
+<!-- Left Panel -->
+
+{% include 'inc/_sidebar.html' %}<!-- /#left-panel -->
+
+<!-- Left Panel -->
+
+<!-- Right Panel -->
+
+<div id="right-panel" class="right-panel">
+
+    <!-- Header-->
+    {% include 'inc/_navbar.html' %}<!-- /header -->
+    <!-- Header-->
+
+
+    <div class="content mt-3">
+        <div class="animated fadeIn">
+
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 ml-auto mr-auto">
+
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="card">
+                            <div class="card-header">
+                                <strong>Işgär maglumatyny</strong> <small> üýtgetmek</small>
+                            </div>
+                            <div class="card-body card-block">
+                                <div class="form-group">
+                                    <label class="form-control-label">Ady, Familiýasy</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
+                                        <input type="text" name="fullname" value="{{ staff.fullname }}" class="form-control" maxlength="255" id="id_fullname">
+                                    </div>
+                                    <small class="form-text text-muted"><strong>meselem.</strong> Oraz Orazmuradowiç</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class=" form-control-label">Wezipesi</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-briefcase"></i></div>
+
+                                        <input type="text" name="profession" value="{{ staff.profession }}" maxlength="255"  id="id_profession" class="form-control">
+                                    </div>
+                                    <small class="form-text text-muted"><strong>meselem.</strong> mugallym</small>
+                                </div>
+                                <div class="form-group">
+                                    <label class=" form-control-label">E-mail</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+                                        <input type="email" name="mail" value="{{ staff.mail }}" maxlength="254"  id="id_mail" class="form-control">
+                                    </div>
+                                    <small class="form-text text-muted"><strong>meselem.</strong> admin@sanly.tm </small>
+                                </div>
+                                <div class="form-group">
+                                    <label class=" form-control-label">Telefon belgiňiz</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-phone"></i></div>
+
+                                        <input type="text" name="phone_number" value="{{ staff.phone_number }}" maxlength="100" id="id_phone_number" class="form-control">
+                                    </div>
+                                    <small class="form-text text-muted"><strong>meselem.</strong> +993 65 1234567 </small>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-light" type="submit">Ýatda sakla!</button>
+                                </div>
+                                <!--?                                {{form.as_p}}-->
+                                <!--?                                <button type="submit">Vatda</button>-->
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div><!-- .animated -->
+    </div><!-- .content -->
+
+</div><!-- /#right-panel -->
+
+<!-- Right Panel -->
+
+
+<script src="{% static '/vendors/jquery/dist/jquery.min.js' %}"></script>
+<script src="{% static '/vendors/popper.js/dist/umd/popper.min.js' %}"></script>
+<script src="{% static '/vendors/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+<script src="{% static '/assets/js/main.js' %}"></script>
+<script src="{% static '/vendors/chosen/chosen.jquery.min.js' %}"></script>
+
+<script>
+    jQuery(document).ready(function() {
+        jQuery(".standardSelect").chosen({
+            disable_search_threshold: 10,
+            no_results_text: "Oops, nothing found!",
+            width: "100%"
+        });
+    });
+</script>
+
+
+</body>
+
+</html>
