@@ -118,7 +118,7 @@ def get_in_work(request):
                     get_in.save()
         df = GetIn.objects.filter(get_in_date=datetime.today().date())
         if df.__len__()==Staff.objects.all().__len__():
-            messages.info(request,'Şu gün üçin maglumatlary girizdiňiz!')
+            messages.info(request,'Şu gün üçin maglumatlary girizildi!')
         return redirect('hasabat')
     return render(request, 'giris_statistika.html', {'staff':staff})
 
