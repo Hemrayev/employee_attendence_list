@@ -38,4 +38,4 @@ class GetIn(models.Model):
     class Meta:
         verbose_name = 'Giris wagty'
         verbose_name_plural = 'Giren wagtlary'
-        ordering = ['-person_id']
+        ordering = ['-get_in_date']
