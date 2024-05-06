@@ -144,16 +144,29 @@
                 {
                     for (let i = 1; i <= days; i++) {
                         let td = document.createElement('td');
-                        let bool = true
-                        for (let item in object)
-                        {
-                            if (parseInt(gun)===object[item].get_in_date)
-                            {
-                                bool = false;
+                        let sd;
+                        if (i===parseInt(gun)){
+                            let bool = true
+                            for (let item in object) {
+                                if (i === object[item].get_in_date && object[item].in_work === true) {
+                                    sd = document.createElement('i');
+                                    sd.classList = 'fa fa-check'
+                                    sd.style = 'font-size: 25px'
+                                    bool=false
+                                    break
+                                }
                             }
+                            if (bool)
+                            {
+                                sd = document.createElement("input")
+                                sd.type='checkbox'
+                                sd.name='in_work'
+                                sd.value=slugs[employees.indexOf(employee)]
+                            }
+                            td.appendChild(sd)
                         }
-                        if (bool===false){
-                            let sd = document.createElement('i');
+                        else {
+                            sd = document.createElement('i');
                             for (let item in object)
                             {
                                 if (i===object[item].get_in_date && object[item].in_work===true)
@@ -165,34 +178,6 @@
                                 {
                                     sd.classList = 'fa fa-close'
                                     sd.style = 'font-size: 25px'
-                                }
-                            }
-                            td.appendChild(sd)
-                        }
-                        else
-                        {
-                            let sd;
-                            if (i===parseInt(gun)){
-                                sd = document.createElement("input")
-                                sd.type='checkbox'
-                                sd.name='in_work'
-                                sd.value=slugs[employees.indexOf(employee)]
-                            }
-                            else{
-                                sd = document.createElement('i');
-                                for (let item in object)
-                                {
-                                    if (i===object[item].get_in_date && object[item].in_work===true)
-                                    {
-                                        sd.classList = 'fa fa-check'
-                                        sd.style = 'font-size: 25px'
-                                    }
-                                    if (i===object[item].get_in_date && object[item].in_work===false)
-                                    {
-                                        sd.classList = 'fa fa-close'
-                                        sd.style = 'font-size: 25px'
-                                    }
-
                                 }
                             }
                             td.appendChild(sd)

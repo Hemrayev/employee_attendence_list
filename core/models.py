@@ -25,7 +25,7 @@ class Staff(models.Model):
 
 
 class GetIn(models.Model):
-    person_id = models.ForeignKey(Staff, on_delete=models.PROTECT, verbose_name='Isgar',related_name='get_in')
+    person_id = models.ForeignKey(Staff, on_delete=models.CASCADE, verbose_name='Isgar',related_name='get_in')
     get_in_date = models.DateField(auto_now_add=True, verbose_name='Giren senesi')
     in_work = models.BooleanField(default=False)
 

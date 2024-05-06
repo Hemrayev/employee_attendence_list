@@ -76,26 +76,28 @@ class PersonUpdateView(UpdateView):
 
 def get_in_work(request,):
     staff = Staff.objects.all()
-    getin = GetIn.objects.values_list('get_in_date', flat=True).distinct()
-    geti = getin.order_by('get_in_date')
+    for item in Staff.objects.all():
+        get_in_today = GetIn.objects.filter(person_id=item.id, get_in_date=datetime.today().date())
+        if not get_in_today:
+            GetIn.objects.create(person_id=item, in_work=False)
+
     if request.method == 'POST':
         in_work = request.POST.getlist('in_work')
+        print(in_work)
         for i in staff:
             if i.slug in in_work:
-                df = GetIn.objects.filter(get_in_date=datetime.today().date(),person_id=i)
-                if len(df) == 0:
-                    get_in = GetIn.objects.create(person_id=i, in_work=True)
+                print(i.slug)
+                df = GetIn.objects.filter(get_in_date=datetime.today().date(), person_id=i, in_work=False)
+                print(len(df))
+                if len(df) == 1:
+                    get_in = GetIn.objects.get(person_id=i, get_in_date=datetime.today().date())
+                    get_in.in_work = True
                     get_in.save()
-            # else:
-            #     df = GetIn.objects.filter(get_in_date=datetime.today().date(),person_id=i)
-            #     if len(df) == 0:
-            #         get_in = GetIn.objects.create(person_id=i, in_work=False)
-            #         get_in.save()
-        df = GetIn.objects.filter(get_in_date=datetime.today().date())
-        return redirect('input_statistics')
     context_list= {}
     context_list['employee']=list(staff.values())
     d=[]
+    getin = GetIn.objects.values_list('get_in_date', flat=True).distinct()
+    geti = getin.order_by('get_in_date')
     for item in geti:
         d.append(item.strftime('%Y'))
     context_list['geti'] = list(set(d))
