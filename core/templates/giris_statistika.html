@@ -133,7 +133,7 @@
             let nameTd = document.createElement('td');
             nameTd.textContent = employee;
             tr.appendChild(nameTd);
-            fetch(`http://127.0.0.1:8000/hasabat/?month=${parseInt(month)+1}&year=${year}&name=${employee}`)
+            fetch(`http://127.0.0.1:8000/hasabat/?month=${parseInt(month)+1}&year=${year}&name=${slugs[employees.indexOf(employee)]}`)
                 .then(response =>response.json())
                 .then(data=> addData(data))
             function addData(object){

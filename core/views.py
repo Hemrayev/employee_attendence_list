@@ -107,7 +107,7 @@ def hasabat(request):
     month = request.GET.get('month')
     year = request.GET.get('year')
     d = list()
-    staff = Staff.objects.get(fullname=id)
+    staff = Staff.objects.get(slug=id)
     get_in = GetIn.objects.filter(person_id=staff, get_in_date__year=year)
     get = get_in.filter(get_in_date__month=month)
     for item in get.values():
