@@ -123,8 +123,10 @@
             thead.appendChild(th);
         }
         const employees = [];
+        const slugs = [];
         for (let item in {{ employee|safe }}) {
             employees.push({{ employee|safe }}[item].fullname)
+            slugs.push({{ employee|safe }}[item].slug)
         }
         employees.forEach(employee => {
             let tr = document.createElement('tr');
@@ -164,21 +166,17 @@
                                     sd.classList = 'fa fa-close'
                                     sd.style = 'font-size: 25px'
                                 }
-
                             }
                             td.appendChild(sd)
                         }
                         else
                         {
-
                             let sd;
-                            console.log(typeof(gun))
                             if (i===parseInt(gun)){
-                                console.log(gun)
                                 sd = document.createElement("input")
                                 sd.type='checkbox'
                                 sd.name='in_work'
-                                sd.value=object[0].person_id_id
+                                sd.value=slugs[employees.indexOf(employee)]
                             }
                             else{
                                 sd = document.createElement('i');

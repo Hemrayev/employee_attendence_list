@@ -10,7 +10,7 @@ class StaffAdmin(admin.ModelAdmin):
     prepopulated_fields = { 'slug':('fullname',)}
 
 class GetInAdmin(admin.ModelAdmin):
-    list_display = ('person_id', 'get_in_date', 'get_in_time', 'in_work')
+    list_display = ('person_id', 'get_in_date', 'in_work')
 
 
 
